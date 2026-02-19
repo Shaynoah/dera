@@ -295,14 +295,14 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                 </div>
               </div>
 
-              {/* Pay Now Button */}
+              {/* Pay Now Button - Desktop */}
               <button 
                 type="button" 
                 onClick={(e) => {
                   console.log('Button clicked')
                   handlePayNow(e)
                 }}
-                className="pay-now-btn"
+                className="pay-now-btn pay-now-desktop"
                 style={{ pointerEvents: 'auto', zIndex: 10 }}
               >
                 Pay now
@@ -344,6 +344,19 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                 <span>KES Ksh {total.toLocaleString()}.00</span>
               </div>
             </div>
+
+            {/* Pay Now Button - Mobile */}
+            <button 
+              type="button" 
+              onClick={(e) => {
+                console.log('Button clicked')
+                handlePayNow(e)
+              }}
+              className="pay-now-btn pay-now-mobile"
+              style={{ pointerEvents: 'auto', zIndex: 10 }}
+            >
+              Pay now
+            </button>
           </div>
         </div>
         ) : (
@@ -426,7 +439,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                     <button 
                       type="button"
                       onClick={handleProceed}
-                      className="proceed-btn"
+                      className="proceed-btn proceed-btn-desktop"
                     >
                       Proceed
                     </button>
@@ -480,6 +493,17 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                   <span>Total Amount</span>
                   <span className="total-amount">KES {total.toLocaleString()}.00</span>
                 </div>
+
+                {/* Proceed Button - Mobile Only */}
+                {paymentMethod && (
+                  <button 
+                    type="button"
+                    onClick={handleProceed}
+                    className="proceed-btn-mobile"
+                  >
+                    Proceed
+                  </button>
+                )}
 
                 <button 
                   type="button"

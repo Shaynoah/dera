@@ -250,6 +250,11 @@
     pointer-events: auto;
 }
 
+.pay-now-mobile {
+    display: none;
+    margin-top: 2rem;
+}
+
 .pay-now-btn:hover {
     background: #333;
 }
@@ -521,6 +526,30 @@
     font-weight: 700;
     color: #1a1a1a;
     font-size: 1.2rem;
+}
+
+.proceed-btn-mobile {
+    display: none;
+    width: 100%;
+    padding: 14px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.proceed-btn-mobile:hover {
+    background: #dc2626;
+}
+
+.proceed-btn-mobile:active {
+    transform: scale(0.98);
 }
 
 .cancel-btn {
@@ -866,5 +895,21 @@
 
     .form-row {
         grid-template-columns: 1fr;
+    }
+
+    .pay-now-desktop {
+        display: none;
+    }
+
+    .pay-now-mobile {
+        display: block;
+    }
+
+    .proceed-btn-desktop {
+        display: none;
+    }
+
+    .proceed-btn-mobile {
+        display: block;
     }
 }
