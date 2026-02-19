@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    padding: 0.8rem 20px;
 }
 
 .nav-brand {
@@ -28,25 +28,49 @@
     align-items: flex-start;
 }
 
+.nav-brand-content {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.nav-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
 .nav-brand h1 {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: 5px;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    font-style: normal;
 }
 
 .nav-slogan {
-    font-size: 0.75rem;
-    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7rem;
+    color: #666;
     font-style: italic;
     margin: 0;
-    margin-top: 2px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    opacity: 0.8;
-    line-height: 1;
+    margin-top: 3px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    opacity: 0.85;
+    line-height: 1.2;
+    text-transform: lowercase;
 }
 
 .nav-brand a {
@@ -146,8 +170,13 @@
 }
 
 @media (max-width: 768px) {
+    .nav-logo {
+        height: 55px;
+    }
+
     .nav-brand h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
     }
 
     .nav-slogan {

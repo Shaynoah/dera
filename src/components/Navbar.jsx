@@ -29,7 +29,10 @@ const Navbar = () => {
       <div className="container">
         <div className="nav-brand">
           <Link to="/">
-            <h1>Dera Drip</h1>
+            <div className="nav-brand-content">
+              <img src="/logo.png" alt="Dera Drip" className="nav-logo" />
+              <h1>Dera Drip</h1>
+            </div>
             <p className="nav-slogan">Premium Clothing for the Modern You</p>
           </Link>
         </div>

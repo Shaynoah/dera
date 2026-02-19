@@ -109,7 +109,7 @@ const CartSidebar = () => {
             onClick={handleCheckout}
             disabled={cartItems.length === 0}
           >
-            Place Order
+            Checkout
           </button>
         </div>
       </div>
