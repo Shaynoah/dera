@@ -1,0 +1,248 @@
+.quick-contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.quick-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(30px);
+    backdrop-filter: blur(10px);
+}
+
+.quick-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    animation: cardSlideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.quick-card:hover .card-glow {
+    opacity: 1;
+}
+
+.quick-card:hover {
+    transform: translateX(10px) translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(102, 126, 234, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.quick-card-icon {
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.icon-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    opacity: 0;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+.quick-card:hover .quick-card-icon {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.quick-card:hover .icon-pulse {
+    animation: iconPulseActive 1s ease-in-out infinite;
+}
+
+.quick-card.whatsapp-card .quick-card-icon {
+    background: linear-gradient(135deg, #25D366 0%, #20BA5A 100%);
+}
+
+.quick-card.whatsapp-card .icon-pulse {
+    background: rgba(37, 211, 102, 0.3);
+}
+
+.quick-card.phone-card .quick-card-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.quick-card.phone-card .icon-pulse {
+    background: rgba(102, 126, 234, 0.3);
+}
+
+.quick-card.email-card .quick-card-icon {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+}
+
+.quick-card.email-card .icon-pulse {
+    background: rgba(255, 107, 107, 0.3);
+}
+
+.quick-card-content {
+    flex: 1;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.quick-card-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.quick-card:hover .quick-card-content h3 {
+    color: var(--secondary-color);
+}
+
+.quick-card-content p {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.quick-card:hover .quick-card-content p {
+    color: var(--text-color);
+}
+
+.quick-card-arrow-wrapper {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+}
+
+.quick-card-arrow {
+    color: #999;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+}
+
+.quick-card:hover .quick-card-arrow-wrapper {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scale(1.1) rotate(90deg);
+}
+
+.quick-card:hover .quick-card-arrow {
+    color: white;
+    transform: translateX(3px);
+}
+
+.card-hover-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.quick-card:hover .card-hover-effect {
+    left: 100%;
+}
+
+@keyframes cardSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9) rotateX(20deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+    }
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+@keyframes iconPulseActive {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.4);
+    }
+}
+
+@media (max-width: 968px) {
+    .quick-contact-cards {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .quick-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-card-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .quick-card-content h3 {
+        font-size: 1.3rem;
+    }
+}

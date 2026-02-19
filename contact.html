@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Dera Drip</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html"><h1>Dera Drip</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-hero-background"></div>
+        <div class="contact-hero-content">
+            <h1 class="contact-hero-title">Get In Touch</h1>
+            <p class="contact-hero-subtitle">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-page-section">
+        <div class="container">
+            <!-- Quick Contact Cards -->
+            <div class="quick-contact-cards">
+                <a href="https://wa.me/254700456049" class="quick-card whatsapp-card" target="_blank">
+                    <div class="quick-card-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3>WhatsApp</h3>
+                        <p>Chat instantly</p>
+                    </div>
+                    <i class="fas fa-arrow-right quick-card-arrow"></i>
+                </a>
+                <a href="tel:0700456049" class="quick-card phone-card">
+                    <div class="quick-card-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3>Call Us</h3>
+                        <p>0700456049</p>
+                    </div>
+                    <i class="fas fa-arrow-right quick-card-arrow"></i>
+                </a>
+                <a href="mailto:info@deradrip.com" class="quick-card email-card">
+                    <div class="quick-card-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="quick-card-content">
+                        <h3>Email</h3>
+                        <p>info@deradrip.com</p>
+                    </div>
+                    <i class="fas fa-arrow-right quick-card-arrow"></i>
+                </a>
+            </div>
+
+            <div class="contact-wrapper">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <div class="form-header">
+                        <div class="form-header-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h2 class="form-title">Send us a Message</h2>
+                        <p class="form-subtitle">Fill out the form below and we'll get back to you as soon as possible</p>
+                    </div>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group modern-input">
+                                <div class="input-wrapper">
+                                    <i class="input-icon fas fa-user"></i>
+                                    <input type="text" id="firstName" name="firstName" placeholder=" " required>
+                                    <label for="firstName">First Name</label>
+                                    <span class="input-border"></span>
+                                </div>
+                            </div>
+                            <div class="form-group modern-input">
+                                <div class="input-wrapper">
+                                    <i class="input-icon fas fa-user"></i>
+                                    <input type="text" id="lastName" name="lastName" placeholder=" " required>
+                                    <label for="lastName">Last Name</label>
+                                    <span class="input-border"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group modern-input">
+                            <div class="input-wrapper">
+                                <i class="input-icon fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" placeholder=" " required>
+                                <label for="email">Email Address</label>
+                                <span class="input-border"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group modern-input">
+                            <div class="input-wrapper">
+                                <i class="input-icon fas fa-phone"></i>
+                                <input type="tel" id="phone" name="phone" placeholder=" " required>
+                                <label for="phone">Phone Number</label>
+                                <span class="input-border"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group modern-select">
+                            <div class="select-wrapper">
+                                <i class="select-icon fas fa-tag"></i>
+                                <select id="subject" name="subject" required>
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="order">Order Question</option>
+                                    <option value="product">Product Information</option>
+                                    <option value="delivery">Delivery & Shipping</option>
+                                    <option value="return">Returns & Exchanges</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <label for="subject">Subject</label>
+                                <span class="select-border"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group modern-textarea">
+                            <div class="textarea-wrapper">
+                                <i class="textarea-icon fas fa-comment-alt"></i>
+                                <textarea id="message" name="message" rows="6" placeholder=" " required></textarea>
+                                <label for="message">Your Message</label>
+                                <span class="textarea-border"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit modern-submit">
+                            <span class="btn-content">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </span>
+                            <div class="btn-shine"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/254700456049" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us!</span>
+    </a>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Dera Drip. Made with ❤️.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Build WhatsApp message
+            let whatsappMessage = `*New Contact Form Submission*\n\n`;
+            whatsappMessage += `*Name:* ${formData.firstName} ${formData.lastName}\n`;
+            whatsappMessage += `*Email:* ${formData.email}\n`;
+            whatsappMessage += `*Phone:* ${formData.phone}\n`;
+            whatsappMessage += `*Subject:* ${formData.subject}\n\n`;
+            whatsappMessage += `*Message:*\n${formData.message}`;
+
+            // Encode and open WhatsApp
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://wa.me/254700456049?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            showNotification('Form submitted! Opening WhatsApp...', 'success');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+.contact-page-section {
+    padding: 120px 0;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-page-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(255, 107, 107, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(118, 75, 162, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    animation: gradientShift 15s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.contact-wrapper {
+    display: block;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 30px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: formSlideIn 0.8s ease 0.8s forwards;
+}
+
+.contact-form-container::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+    animation: rotateGradient 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes rotateGradient {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes formSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.contact-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 30%, #ff6b6b 60%, #667eea 100%);
+    background-size: 200% 100%;
+    animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.form-header-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 
+        0 15px 40px rgba(102, 126, 234, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: float 3s ease-in-out infinite, gradientShift 5s ease infinite;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+}
+
+.form-header-icon::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #667eea);
+    background-size: 300% 300%;
+    z-index: -1;
+    opacity: 0.6;
+    animation: gradientRotate 3s linear infinite;
+    filter: blur(8px);
+}
+
+@keyframes gradientRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.form-header-icon:hover {
+    transform: scale(1.1) rotate(5deg) translateY(-5px);
+    box-shadow: 
+        0 20px 50px rgba(102, 126, 234, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.form-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #667eea 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.form-subtitle {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+/* Modern Input Styling */
+.modern-input .input-wrapper,
+.modern-textarea .textarea-wrapper {
+    position: relative;
+    margin-top: 0.75rem;
+}
+
+.modern-input .input-icon,
+.modern-textarea .textarea-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.modern-textarea .textarea-icon {
+    top: 20px;
+    transform: none;
+}
+
+.modern-input input,
+.modern-textarea textarea {
+    width: 100%;
+    padding: 18px 20px 18px 55px;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--text-color);
+    outline: none;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.modern-input input:hover,
+.modern-textarea textarea:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+}
+
+.modern-textarea textarea {
+    padding-top: 16px;
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.modern-input label,
+.modern-textarea label {
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 0.95rem;
+    font-weight: 500;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 10px;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.modern-textarea label {
+    top: 20px;
+    transform: none;
+}
+
+.modern-input input:focus,
+.modern-input input:not(:placeholder-shown),
+.modern-textarea textarea:focus,
+.modern-textarea textarea:not(:placeholder-shown) {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 
+        0 0 0 4px rgba(102, 126, 234, 0.1),
+        0 8px 25px rgba(102, 126, 234, 0.15),
+        0 2px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.modern-input input:focus + label,
+.modern-input input:not(:placeholder-shown) + label,
+.modern-textarea textarea:focus + label,
+.modern-textarea textarea:not(:placeholder-shown) + label {
+    top: 0;
+    left: 55px;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: #667eea;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.modern-input input:focus ~ .input-icon,
+.modern-textarea textarea:focus ~ .textarea-icon {
+    color: #667eea;
+    transform: translateY(-50%) scale(1.15);
+}
+
+.modern-textarea textarea:focus ~ .textarea-icon {
+    transform: scale(1.15);
+}
+
+.input-border,
+.textarea-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
+    background-size: 200% 100%;
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: gradientMove 3s ease infinite;
+}
+
+.modern-input input:focus ~ .input-border,
+.modern-textarea textarea:focus ~ .textarea-border {
+    width: 100%;
+}
+
+/* Modern Select Styling */
+.modern-select .select-wrapper {
+    position: relative;
+    margin-top: 0.75rem;
+}
+
+.modern-select .select-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.modern-select select {
+    width: 100%;
+    padding: 18px 45px 18px 55px;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--text-color);
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.modern-select select:focus {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 
+        0 0 0 4px rgba(102, 126, 234, 0.1),
+        0 8px 25px rgba(102, 126, 234, 0.15),
+        0 2px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.modern-select select:focus ~ .select-icon {
+    color: #667eea;
+    transform: translateY(-50%) scale(1.15);
+}
+
+.modern-select select:focus ~ .select-border {
+    width: 100%;
+}
+
+.modern-select label {
+    position: absolute;
+    left: 55px;
+    top: 0;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 0.85rem;
+    font-weight: 600;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 10px;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+}
+
+.modern-select select:focus ~ label,
+.modern-select select:not([value=""]) ~ label {
+    color: #667eea;
+}
+
+.modern-select .select-wrapper::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    font-size: 0.9rem;
+}
+
+.modern-select .select-wrapper:focus-within::after {
+    color: #667eea;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.modern-submit {
+    margin-top: 0.75rem;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    box-shadow: 
+        0 10px 30px rgba(102, 126, 234, 0.4),
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    animation: gradientShift 5s ease infinite;
+}
+
+.modern-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.modern-submit:hover::before {
+    left: 100%;
+}
+
+.modern-submit .btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 45px;
+    font-size: 1.05rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.modern-submit .btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.modern-submit:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 15px 45px rgba(102, 126, 234, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modern-submit:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.modern-submit:hover .btn-content i {
+    transform: translateX(8px) rotate(-15deg) scale(1.1);
+}
+
+.modern-submit .btn-content i {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: 2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-title {
+        font-size: 2rem;
+    }
+}
