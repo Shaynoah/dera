@@ -1,0 +1,348 @@
+.admin-dashboard {
+  padding: 110px 0 50px;
+  background: linear-gradient(180deg, #f8f1e8 0%, #fbf7f2 42%, #ffffff 100%);
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.admin-dashboard .container {
+  max-width: 1080px;
+  margin: 0 auto;
+  overflow-x: clip;
+}
+
+.admin-dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 14px;
+}
+
+.admin-header-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-badge {
+  width: fit-content;
+  background: #f2e4d2;
+  border: 1px solid #e8d3bb;
+  color: #6a4a2b;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.admin-dashboard-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 0.2px;
+  color: #2f2014;
+}
+
+.admin-dashboard-header p {
+  margin: 0;
+  color: #81674e;
+  font-size: 0.95rem;
+}
+
+.admin-dashboard-header button,
+.admin-add-form button {
+  border: none;
+  background: linear-gradient(90deg, #3a2a1d 0%, #5b3f2a 100%);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.admin-delete-btn {
+  border: none;
+  background: #c5564f;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  width: fit-content;
+  min-width: 170px;
+}
+
+.admin-sold-btn {
+  border: none;
+  background: #4b3525;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  width: fit-content;
+  min-width: 170px;
+}
+
+.admin-price-editor {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-category-editor label {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-price-btn {
+  border: none;
+  background: linear-gradient(90deg, #3a2a1d 0%, #5b3f2a 100%);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  width: fit-content;
+  min-width: 150px;
+}
+
+.admin-price-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(58, 42, 29, 0.2);
+}
+
+.admin-sold-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(75, 53, 37, 0.24);
+  background: #5b3f2a;
+}
+
+.admin-sold-btn.is-sold {
+  background: #4f9a6b;
+}
+
+.admin-sold-btn.is-sold:hover {
+  background: #41855b;
+  box-shadow: 0 8px 16px rgba(65, 133, 91, 0.24);
+}
+
+.admin-delete-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(197, 86, 79, 0.28);
+  background: #b24a44;
+}
+
+.admin-dashboard-header button:hover,
+.admin-add-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(58, 42, 29, 0.2);
+}
+
+.admin-add-form {
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf3 100%);
+  padding: 22px;
+  border-radius: 20px;
+  display: grid;
+  gap: 12px;
+  box-shadow: 0 14px 30px rgba(78, 58, 41, 0.1);
+  border: 1px solid #f1e3d1;
+  margin-bottom: 24px;
+}
+
+.admin-add-form h2 {
+  margin: 0 0 2px;
+  font-size: 1.2rem;
+  color: #3c2a1d;
+}
+
+.admin-add-form input,
+.admin-add-form select,
+.admin-add-form textarea,
+.admin-product-details input,
+.admin-product-details select {
+  border: 1px solid #e7d7c7;
+  border-radius: 12px;
+  padding: 11px 12px;
+  width: 100%;
+  font: inherit;
+  background: #fffdfa;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.admin-add-form input[type='file'] {
+  padding: 8px 10px;
+  background: #fff;
+}
+
+.admin-add-form button {
+  width: fit-content;
+  min-width: 180px;
+  justify-self: start;
+}
+
+.admin-upload-error {
+  margin: -2px 0 0;
+  color: #c62828;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.admin-add-form input:focus,
+.admin-add-form select:focus,
+.admin-add-form textarea:focus,
+.admin-product-details input:focus,
+.admin-product-details select:focus {
+  outline: none;
+  border-color: #be9a74;
+  box-shadow: 0 0 0 3px rgba(190, 154, 116, 0.18);
+  background: #fff;
+}
+
+.admin-add-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.admin-products-list {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-product-item {
+  background: linear-gradient(180deg, #ffffff 0%, #fffbf6 100%);
+  border-radius: 18px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  box-shadow: 0 12px 26px rgba(78, 58, 41, 0.1);
+  border: 1px solid #f1e3d1;
+  align-items: start;
+}
+
+.admin-product-item img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f4f4f4;
+  border: 1px solid #eadbc9;
+  padding: 6px;
+}
+
+.admin-product-no-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  background: #f7efe4;
+  border: 1px dashed #cfbca6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #8a6d52;
+  font-size: 0.82rem;
+  padding: 8px;
+}
+
+.admin-product-details {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-product-details h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #121212;
+}
+
+.admin-product-details label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #5b4430;
+  display: grid;
+  gap: 6px;
+}
+
+.admin-product-details input[type='file'] {
+  background: #fff;
+}
+
+.admin-sold-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.admin-sold-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: #111;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding-top: 95px;
+  }
+
+  .admin-dashboard .container {
+    width: min(95%, 1080px);
+    max-width: 100%;
+  }
+
+  .admin-dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .admin-dashboard-header p {
+    font-size: 0.9rem;
+  }
+
+  .admin-product-item {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-product-item img {
+    width: 100%;
+    height: 190px;
+    object-fit: contain;
+  }
+
+  .admin-product-no-image {
+    width: 100%;
+    height: 190px;
+  }
+
+  .admin-add-form button,
+  .admin-price-btn,
+  .admin-sold-btn,
+  .admin-delete-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-price-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-add-form,
+  .admin-products-list,
+  .admin-product-item,
+  .admin-product-details {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}

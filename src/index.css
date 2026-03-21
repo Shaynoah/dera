@@ -1,1 +1,200 @@
-/* Base styles are in App.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+}
+
+/* Custom Animations */
+@keyframes whatsappFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes whatsappPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7), 0 0 0 10px rgba(37, 211, 102, 0); }
+}
+
+@keyframes whatsappRipple {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes whatsappIconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes particleFloat {
+  0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+  50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes titleReveal {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes expandLine {
+  from { transform: translateX(-50%) scaleX(0); }
+  to { transform: translateX(-50%) scaleX(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes backgroundZoom {
+  0%, 100% { transform: scale(1.1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes wordReveal {
+  from { opacity: 0; transform: translateY(30px) rotateX(90deg); }
+  to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+}
+
+@keyframes gradientShine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes scrollLine {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(10px); opacity: 0.3; }
+}
+
+@keyframes floatShape {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+  25% { transform: translate(30px, -30px) rotate(90deg); opacity: 0.5; }
+  50% { transform: translate(-20px, -60px) rotate(180deg); opacity: 0.4; }
+  75% { transform: translate(-40px, -30px) rotate(270deg); opacity: 0.5; }
+}
+
+@keyframes iconPulse {
+  0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes iconPulseActive {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.2); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.4); }
+}
+
+@keyframes formSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes rotateGradient {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradientRotate {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardSlideIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}

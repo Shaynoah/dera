@@ -20,31 +20,34 @@ const ContactHero = () => {
     <section className="contact-hero">
       <div className="contact-hero-background"></div>
       <div className="contact-hero-particles"></div>
-      <div className="contact-hero-gradient" style={{
-        background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(102, 126, 234, 0.3) 0%, transparent 50%)`
-      }}></div>
+      <div 
+        className="contact-hero-mouse-effect" 
+        style={{
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(102, 126, 234, 0.3) 0%, transparent 50%)`
+        }}
+      ></div>
       <div className="contact-hero-content">
-        <div className="hero-badge-animated">
-          <span className="badge-dot"></span>
+        <div className="contact-hero-badge">
+          <span className="contact-hero-badge-dot"></span>
           <span>Let's Connect</span>
         </div>
         <h1 className="contact-hero-title">
-          <span className="title-word">Get</span>
-          <span className="title-word">In</span>
-          <span className="title-word highlight">Touch</span>
+          <span className="contact-hero-title-word">Get</span>
+          <span className="contact-hero-title-word">In</span>
+          <span className="contact-hero-title-word-touch">Touch</span>
         </h1>
-        <p className="contact-hero-subtitle">
+        <p className="contact-hero-description">
           We'd love to hear from you. Send us a message and we'll respond as soon as possible.
         </p>
-        <div className="hero-scroll-indicator">
-          <div className="scroll-line"></div>
-          <span>Scroll to contact</span>
+        <div className="contact-hero-scroll">
+          <div className="contact-hero-scroll-line"></div>
+          <span className="contact-hero-scroll-text">Scroll to contact</span>
         </div>
       </div>
-      <div className="floating-shapes">
-        <div className="shape shape-1"></div>
-        <div className="shape shape-2"></div>
-        <div className="shape shape-3"></div>
+      <div className="contact-hero-shapes">
+        <div className="contact-hero-shape"></div>
+        <div className="contact-hero-shape"></div>
+        <div className="contact-hero-shape"></div>
       </div>
     </section>
   )

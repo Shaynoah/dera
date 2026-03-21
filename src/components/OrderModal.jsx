@@ -110,119 +110,124 @@ const OrderModal = ({ onClose, cartItems, total }) => {
   }
 
   return (
-    <div className="checkout-modal active" onClick={onClose}>
-      <div className="checkout-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-checkout" onClick={onClose}>
+    <div className="order-modal-overlay" onClick={onClose}>
+      <div className="order-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="order-modal-close" onClick={onClose}>
           <i className="fas fa-times"></i>
         </button>
         
         {!showPayment ? (
-          <div className="checkout-container">
+          <div className="order-modal-grid">
             {/* Left Side - Form */}
-            <div className="checkout-form-section">
+            <div className="order-modal-form-section">
               <form id="checkoutForm">
               {/* Contact Section */}
-              <div className="checkout-section">
-                <h2 className="section-title">Contact</h2>
-                <div className="form-field">
+              <div className="order-modal-section">
+                <h2 className="order-modal-section-title">Contact</h2>
+                <div className="mb-4 relative">
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={errors.email ? 'error' : ''}
+                    className={`order-modal-input ${errors.email ? 'order-modal-input-error' : ''}`}
                     placeholder="Email"
                   />
-                  {errors.email && <span className="error-message">{errors.email}</span>}
+                  {errors.email && <span className="order-modal-error">{errors.email}</span>}
                 </div>
               </div>
 
               {/* Delivery Section */}
-              <div className="checkout-section">
-                <h2 className="section-title">Delivery</h2>
+              <div className="order-modal-section">
+                <h2 className="order-modal-section-title">Delivery</h2>
                 
-                <div className="form-field">
+                <div className="mb-4 relative">
                   <select
                     name="country"
                     value={formData.country}
                     onChange={handleChange}
+                    className="order-modal-select"
                   >
                     <option value="Kenya">Kenya</option>
                   </select>
                 </div>
 
-                <div className="form-row">
-                  <div className="form-field">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
+                  <div className="mb-4 relative">
                     <input
                       type="text"
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      className={errors.firstName ? 'error' : ''}
+                      className={`order-modal-input ${errors.firstName ? 'order-modal-input-error' : ''}`}
                       placeholder="First name"
                     />
-                    {errors.firstName && <span className="error-message">{errors.firstName}</span>}
+                    {errors.firstName && <span className="order-modal-error">{errors.firstName}</span>}
                   </div>
-                  <div className="form-field">
+                  <div className="mb-4 relative">
                     <input
                       type="text"
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      className={errors.lastName ? 'error' : ''}
+                      className={`order-modal-input ${errors.lastName ? 'order-modal-input-error' : ''}`}
                       placeholder="Last name"
                     />
-                    {errors.lastName && <span className="error-message">{errors.lastName}</span>}
+                    {errors.lastName && <span className="order-modal-error">{errors.lastName}</span>}
                   </div>
                 </div>
 
-                <div className="form-field">
+                <div className="mb-4 relative">
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
+                    className="order-modal-input"
                     placeholder="Address"
                   />
                 </div>
 
-                <div className="form-field">
+                <div className="mb-4 relative">
                   <input
                     type="text"
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
+                    className="order-modal-input"
                     placeholder="City"
                   />
                 </div>
 
-                <div className="form-field">
+                <div className="mb-4 relative">
                   <input
                     type="text"
                     name="postalCode"
                     value={formData.postalCode}
                     onChange={handleChange}
+                    className="order-modal-input"
                     placeholder="Postal code (optional)"
                   />
                 </div>
 
-                <div className="form-field phone-field">
+                <div className="mb-4 relative">
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    className="order-modal-input"
                     placeholder="Phone"
                   />
-                  <span className="flag-icon">🇰🇪</span>
+                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[1.2rem] pointer-events-none">🇰🇪</span>
                 </div>
               </div>
 
               {/* Shipping Method Section */}
-              <div className="checkout-section">
-                <h2 className="section-title">Shipping method</h2>
-                <div className="shipping-option">
-                  <label className="shipping-option-label">
+              <div className="order-modal-section">
+                <h2 className="order-modal-section-title">Shipping method</h2>
+                <div className="order-modal-checkbox-group">
+                  <label className="order-modal-checkbox-label">
                     <input
                       type="checkbox"
                       name="shippingMethod"
@@ -234,15 +239,16 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                           shippingMethod: e.target.checked ? 'hq-pickup' : ''
                         })
                       }}
+                      className="order-modal-checkbox"
                     />
-                    <div className="shipping-option-content">
-                      <span className="shipping-option-text">HQ Pick Up: Diamond building Unit G10 Next to Bihi towers moi avenue</span>
-                      <span className="shipping-option-price">FREE</span>
+                    <div className="order-modal-checkbox-content">
+                      <span className="order-modal-checkbox-text">HQ Pick Up: Diamond building Unit G10 Next to Bihi towers moi avenue</span>
+                      <span className="order-modal-checkbox-price">FREE</span>
                     </div>
                   </label>
                 </div>
-                <div className="shipping-option">
-                  <label className="shipping-option-label">
+                <div className="order-modal-checkbox-group">
+                  <label className="order-modal-checkbox-label">
                     <input
                       type="checkbox"
                       name="shippingMethod"
@@ -254,19 +260,21 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                           shippingMethod: e.target.checked ? 'delivery-point' : ''
                         })
                       }}
+                      className="order-modal-checkbox"
                     />
-                    <div className="shipping-option-content">
-                      <span className="shipping-option-text">Choose preferred delivery point</span>
+                    <div className="order-modal-checkbox-content">
+                      <span className="order-modal-checkbox-text">Choose preferred delivery point</span>
                     </div>
                   </label>
                 </div>
                 {formData.shippingMethod === 'delivery-point' && (
-                  <div className="form-field" style={{ marginTop: '1rem' }}>
+                  <div className="mb-4 relative mt-4">
                     <input
                       type="text"
                       name="deliveryPointLocation"
                       value={formData.deliveryPointLocation}
                       onChange={handleChange}
+                      className="order-modal-input"
                       placeholder="Enter your preferred delivery location"
                     />
                   </div>
@@ -274,10 +282,10 @@ const OrderModal = ({ onClose, cartItems, total }) => {
               </div>
 
               {/* Billing Address Section */}
-              <div className="checkout-section">
-                <h2 className="section-title">Billing address</h2>
-                <div className="billing-option">
-                  <label className="billing-option-label">
+              <div className="order-modal-section">
+                <h2 className="order-modal-section-title">Billing address</h2>
+                <div className="order-modal-billing-group">
+                  <label className="order-modal-checkbox-label">
                     <input
                       type="checkbox"
                       name="billingAddress"
@@ -289,8 +297,9 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                           billingAddress: e.target.checked ? 'same' : ''
                         })
                       }}
+                      className="order-modal-checkbox"
                     />
-                    <span className="billing-option-text">Same as shipping address</span>
+                    <span className="order-modal-checkbox-text">Same as shipping address</span>
                   </label>
                 </div>
               </div>
@@ -302,7 +311,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                   console.log('Button clicked')
                   handlePayNow(e)
                 }}
-                className="pay-now-btn pay-now-desktop"
+                className="order-modal-pay-btn order-modal-pay-btn-desktop"
                 style={{ pointerEvents: 'auto', zIndex: 10 }}
               >
                 Pay now
@@ -311,35 +320,35 @@ const OrderModal = ({ onClose, cartItems, total }) => {
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="checkout-summary-section">
-            <div className="order-items">
+          <div className="order-modal-summary">
+            <div className="mb-8">
               {cartItems.map(item => (
-                <div key={item.id} className="order-item">
-                  <div className="item-image-wrapper">
+                <div key={item.id} className="order-modal-item">
+                  <div className="order-modal-item-image">
                     <img src={item.image} alt={item.name} />
-                    <span className="item-quantity">{item.quantity}</span>
+                    <span className="order-modal-item-badge">{item.quantity}</span>
                   </div>
-                  <div className="item-details">
-                    <div className="item-name">{item.name}</div>
-                    <div className="item-price">Ksh {(item.price * item.quantity).toLocaleString()}.00</div>
+                  <div className="order-modal-item-details">
+                    <div className="order-modal-item-name">{item.name}</div>
+                    <div className="order-modal-item-price">Ksh {(item.price * item.quantity).toLocaleString()}.00</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="order-breakdown">
-              <div className="breakdown-row">
+            <div className="order-modal-summary-divider">
+              <div className="order-modal-summary-row">
                 <span>Subtotal</span>
                 <span>Ksh {total.toLocaleString()}.00</span>
               </div>
-              <div className="breakdown-row">
+              <div className="order-modal-summary-row">
                 <span>
                   Shipping
-                  <i className="fas fa-info-circle info-icon"></i>
+                  <i className="fas fa-info-circle ml-2 text-[#9ca3af] text-[0.85rem] cursor-help"></i>
                 </span>
                 <span>FREE</span>
               </div>
-              <div className="breakdown-row total-row">
+              <div className="order-modal-summary-total">
                 <span>Total</span>
                 <span>KES Ksh {total.toLocaleString()}.00</span>
               </div>
@@ -352,7 +361,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                 console.log('Button clicked')
                 handlePayNow(e)
               }}
-              className="pay-now-btn pay-now-mobile"
+              className="order-modal-pay-btn order-modal-pay-btn-mobile"
               style={{ pointerEvents: 'auto', zIndex: 10 }}
             >
               Pay now
@@ -361,51 +370,53 @@ const OrderModal = ({ onClose, cartItems, total }) => {
         </div>
         ) : (
           /* Payment Page */
-          <div className="payment-page-container">
-            <div className="payment-page-left">
-              <div className="breadcrumb">
+          <div className="order-modal-grid">
+            <div className="order-modal-payment-section">
+              <div className="order-modal-payment-back">
                 <a href="#" onClick={(e) => { e.preventDefault(); setShowPayment(false); }}>Cart</a>
               </div>
               
-              <div className="payment-section-full">
-                <h2 className="section-title">Please select your preferred payment option</h2>
+              <div className="mt-4">
+                <h2 className="order-modal-section-title">Please select your preferred payment option</h2>
                 
-                <div className="payment-options">
-                  <label className={`payment-option ${paymentMethod === 'mpesa' ? 'selected' : ''}`}>
+                <div className="flex flex-col gap-4 mb-8">
+                  <label className={`order-modal-payment-option ${paymentMethod === 'mpesa' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="mpesa"
                       checked={paymentMethod === 'mpesa'}
                       onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="order-modal-payment-radio"
                     />
-                    <div className="payment-option-content">
-                      <span className="payment-logo mpesa-logo">M-PESA</span>
-                      <span className="payment-name">M-PESA</span>
+                    <div className="order-modal-payment-content">
+                      <span className="order-modal-payment-badge order-modal-payment-badge-mpesa">M-PESA</span>
+                      <span className="order-modal-payment-name">M-PESA</span>
                     </div>
                   </label>
 
-                  <label className={`payment-option ${paymentMethod === 'airtel' ? 'selected' : ''}`}>
+                  <label className={`order-modal-payment-option ${paymentMethod === 'airtel' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="airtel"
                       checked={paymentMethod === 'airtel'}
                       onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="order-modal-payment-radio"
                     />
-                    <div className="payment-option-content">
-                      <span className="payment-logo airtel-logo">Airtel Money</span>
-                      <span className="payment-name">Airtel Money</span>
+                    <div className="order-modal-payment-content">
+                      <span className="order-modal-payment-badge order-modal-payment-badge-airtel">Airtel Money</span>
+                      <span className="order-modal-payment-name">Airtel Money</span>
                     </div>
                   </label>
                 </div>
 
                 {paymentMethod && (
-                  <div className="payment-instructions">
-                    <p className="payment-amount">Pay "Dera Drip" KES {total.toLocaleString()}.00</p>
+                  <div className="mt-8">
+                    <p className="order-modal-payment-amount">Pay "Dera Drip" KES {total.toLocaleString()}.00</p>
                     
                     {paymentMethod === 'mpesa' && (
-                      <div className="mpesa-instructions">
+                      <div className="order-modal-payment-instructions">
                         <p>1. Provide your MPESA [KE] mobile number below</p>
                         <p>2. Click Proceed and a prompt will appear on your phone requesting you to confirm transaction by providing your MPESA PIN</p>
                         <p>3. Once completed, you will receive the confirmation SMS for this transaction</p>
@@ -413,25 +424,27 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                     )}
 
                     {paymentMethod === 'airtel' && (
-                      <div className="mpesa-instructions">
+                      <div className="order-modal-payment-instructions">
                         <p>1. Provide your Airtel Money [KE] mobile number below</p>
                         <p>2. Click Proceed and a prompt will appear on your phone requesting you to confirm transaction by providing your Airtel Money PIN</p>
                         <p>3. Once completed, you will receive the confirmation SMS for this transaction</p>
                       </div>
                     )}
 
-                    <div className="mobile-number-field">
-                      <i className="fas fa-lock lock-icon"></i>
-                      <label>Provide your {paymentMethod === 'mpesa' ? 'Mpesa' : 'Airtel Money'} [KE] Mobile number</label>
-                      <div className="phone-input-wrapper">
-                        <i className="fas fa-phone phone-input-icon"></i>
-                        <span className="phone-prefix">+254</span>
+                    <div className="mb-6">
+                      <div className="order-modal-payment-label">
+                        <i className="fas fa-lock"></i>
+                        <label>Provide your {paymentMethod === 'mpesa' ? 'Mpesa' : 'Airtel Money'} [KE] Mobile number</label>
+                      </div>
+                      <div className="order-modal-payment-input-wrapper">
+                        <i className="fas fa-phone"></i>
+                        <span>+254</span>
                         <input
                           type="tel"
                           value={mpesaNumber}
                           onChange={(e) => setMpesaNumber(e.target.value)}
                           placeholder="e.g 7XX XXX XXX"
-                          className="phone-input"
+                          className="order-modal-payment-input"
                         />
                       </div>
                     </div>
@@ -439,7 +452,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                     <button 
                       type="button"
                       onClick={handleProceed}
-                      className="proceed-btn proceed-btn-desktop"
+                      className="order-modal-proceed-btn hidden md:block"
                     >
                       Proceed
                     </button>
@@ -448,50 +461,50 @@ const OrderModal = ({ onClose, cartItems, total }) => {
               </div>
             </div>
 
-            <div className="payment-page-right">
-              <div className="payment-summary">
-                <div className="payment-order-items">
+            <div className="order-modal-summary">
+              <div className="flex flex-col gap-8">
+                <div className="mb-8 pb-6 border-b border-[#e5e7eb]">
                   {cartItems.map(item => (
-                    <div key={item.id} className="payment-order-item">
-                      <div className="payment-item-image-wrapper">
-                        <img src={item.image} alt={item.name} />
-                        <span className="payment-item-quantity">{item.quantity}</span>
+                    <div key={item.id} className="flex items-start gap-4 mb-6 last:mb-0">
+                      <div className="relative w-[60px] h-[60px] flex-shrink-0 rounded-lg overflow-hidden bg-[#f3f4f6]">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        <span className="absolute -top-1.5 -right-1.5 bg-[#1a1a1a] text-white w-6 h-6 rounded-md flex items-center justify-center text-[0.75rem] font-bold border-2 border-white shadow-[0_2px_4px_rgba(0,0,0,0.2)]">{item.quantity}</span>
                       </div>
-                      <div className="payment-item-details">
-                        <div className="payment-item-name">{item.name}</div>
-                        <div className="payment-item-price">Ksh {(item.price * item.quantity).toLocaleString()}.00</div>
+                      <div className="flex-1 flex flex-col gap-1">
+                        <div className="font-bold text-[#1a1a1a] text-[0.95rem]">{item.name}</div>
+                        <div className="text-[#4b5563] text-[0.9rem]">Ksh {(item.price * item.quantity).toLocaleString()}.00</div>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="summary-section">
-                  <h3>Customer Details</h3>
-                  <p>{formData.firstName} {formData.lastName}</p>
-                  <p>{formData.email}</p>
+                <div className="pb-6 border-b border-[#e5e7eb] last:border-b-0">
+                  <h3 className="text-[0.9rem] font-semibold text-[#1a1a1a] mb-3 uppercase tracking-wide">Customer Details</h3>
+                  <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.firstName} {formData.lastName}</p>
+                  <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.email}</p>
                 </div>
 
-                <div className="summary-section">
-                  <h3>Shipping details</h3>
-                  <p>{formData.firstName} {formData.lastName}</p>
-                  <p>{formData.email}</p>
+                <div className="pb-6 border-b border-[#e5e7eb] last:border-b-0">
+                  <h3 className="text-[0.9rem] font-semibold text-[#1a1a1a] mb-3 uppercase tracking-wide">Shipping details</h3>
+                  <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.firstName} {formData.lastName}</p>
+                  <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.email}</p>
                   {formData.shippingMethod === 'hq-pickup' && (
-                    <p>Diamond building Unit G10 Next to Bihi towers moi avenue</p>
+                    <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">Diamond building Unit G10 Next to Bihi towers moi avenue</p>
                   )}
                   {formData.shippingMethod === 'delivery-point' && (
-                    <p>{formData.deliveryPointLocation || 'Preferred delivery point'}</p>
+                    <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.deliveryPointLocation || 'Preferred delivery point'}</p>
                   )}
                   {formData.shippingMethod !== 'hq-pickup' && formData.shippingMethod !== 'delivery-point' && formData.address && (
                     <>
-                      <p>{formData.address}</p>
-                      <p>{formData.city ? formData.city.toUpperCase() : 'NAIROBI'}, Kenya</p>
+                      <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.address}</p>
+                      <p className="text-[0.9rem] text-[#4b5563] mb-1 leading-[1.5]">{formData.city ? formData.city.toUpperCase() : 'NAIROBI'}, Kenya</p>
                     </>
                   )}
                 </div>
 
-                <div className="summary-total">
-                  <span>Total Amount</span>
-                  <span className="total-amount">KES {total.toLocaleString()}.00</span>
+                <div className="flex justify-between items-center py-6 border-t-2 border-[#1a1a1a] border-b-2 border-[#1a1a1a]">
+                  <span className="font-semibold text-[#1a1a1a] text-base">Total Amount</span>
+                  <span className="font-bold text-[#1a1a1a] text-[1.2rem]">KES {total.toLocaleString()}.00</span>
                 </div>
 
                 {/* Proceed Button - Mobile Only */}
@@ -499,7 +512,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                   <button 
                     type="button"
                     onClick={handleProceed}
-                    className="proceed-btn-mobile"
+                    className="order-modal-proceed-btn hidden md:block mt-6 mb-4"
                   >
                     Proceed
                   </button>
@@ -508,7 +521,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                 <button 
                   type="button"
                   onClick={() => setShowPayment(false)}
-                  className="cancel-btn"
+                  className="order-modal-proceed-btn mt-4"
                 >
                   &lt;&lt; Cancel / Go Back to Checkout
                 </button>

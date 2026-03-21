@@ -17,7 +17,7 @@ const ContactForm = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in')
+            entry.target.classList.add('opacity-100', 'translate-y-0')
             observer.unobserve(entry.target)
           }
         })
@@ -64,19 +64,19 @@ const ContactForm = () => {
   }
 
   return (
-    <div ref={formRef} className="contact-form-container">
-      <div className="form-header">
-        <div className="form-header-icon">
+    <div ref={formRef} className="contact-form">
+      <div className="contact-form-header">
+        <div className="contact-form-icon">
           <i className="fas fa-paper-plane"></i>
         </div>
-        <h2 className="form-title">Send us a Message</h2>
-        <p className="form-subtitle">Fill out the form below and we'll get back to you as soon as possible</p>
+        <h2 className="contact-form-title">Send us a Message</h2>
+        <p className="contact-form-subtitle">Fill out the form below and we'll get back to you as soon as possible</p>
       </div>
-      <form id="contactForm" className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div className="form-group modern-input">
-            <div className="input-wrapper">
-              <i className="input-icon fas fa-user"></i>
+      <form id="contactForm" className="contact-form-form" onSubmit={handleSubmit}>
+        <div className="contact-form-row">
+          <div className="contact-form-field">
+            <div className="contact-form-field-wrapper">
+              <i className="fas fa-user contact-form-icon-input"></i>
               <input 
                 type="text" 
                 id="firstName" 
@@ -85,14 +85,15 @@ const ContactForm = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 required 
+                className="contact-form-input"
               />
-              <label htmlFor="firstName">First Name</label>
-              <span className="input-border"></span>
+              <label htmlFor="firstName" className="contact-form-label">First Name</label>
+              <span className="contact-form-underline"></span>
             </div>
           </div>
-          <div className="form-group modern-input">
-            <div className="input-wrapper">
-              <i className="input-icon fas fa-user"></i>
+          <div className="contact-form-field">
+            <div className="contact-form-field-wrapper">
+              <i className="fas fa-user contact-form-icon-input"></i>
               <input 
                 type="text" 
                 id="lastName" 
@@ -101,16 +102,17 @@ const ContactForm = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 required 
+                className="contact-form-input"
               />
-              <label htmlFor="lastName">Last Name</label>
-              <span className="input-border"></span>
+              <label htmlFor="lastName" className="contact-form-label">Last Name</label>
+              <span className="contact-form-underline"></span>
             </div>
           </div>
         </div>
 
-        <div className="form-group modern-input">
-          <div className="input-wrapper">
-            <i className="input-icon fas fa-envelope"></i>
+        <div className="contact-form-field">
+          <div className="contact-form-field-wrapper">
+            <i className="fas fa-envelope contact-form-icon-input"></i>
             <input 
               type="email" 
               id="email" 
@@ -119,15 +121,16 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleChange}
               required 
+              className="contact-form-input"
             />
-            <label htmlFor="email">Email Address</label>
-            <span className="input-border"></span>
+            <label htmlFor="email" className="contact-form-label">Email Address</label>
+            <span className="contact-form-underline"></span>
           </div>
         </div>
 
-        <div className="form-group modern-input">
-          <div className="input-wrapper">
-            <i className="input-icon fas fa-phone"></i>
+        <div className="contact-form-field">
+          <div className="contact-form-field-wrapper">
+            <i className="fas fa-phone contact-form-icon-input"></i>
             <input 
               type="tel" 
               id="phone" 
@@ -136,21 +139,23 @@ const ContactForm = () => {
               value={formData.phone}
               onChange={handleChange}
               required 
+              className="contact-form-input"
             />
-            <label htmlFor="phone">Phone Number</label>
-            <span className="input-border"></span>
+            <label htmlFor="phone" className="contact-form-label">Phone Number</label>
+            <span className="contact-form-underline"></span>
           </div>
         </div>
 
-        <div className="form-group modern-select">
-          <div className="select-wrapper">
-            <i className="select-icon fas fa-tag"></i>
+        <div className="contact-form-field">
+          <div className="contact-form-field-wrapper contact-form-select-wrapper">
+            <i className="fas fa-tag contact-form-icon-input"></i>
             <select 
               id="subject" 
               name="subject" 
               value={formData.subject}
               onChange={handleChange}
               required
+              className="contact-form-select"
             >
               <option value="" disabled>Select a subject</option>
               <option value="general">General Inquiry</option>
@@ -160,14 +165,17 @@ const ContactForm = () => {
               <option value="return">Returns & Exchanges</option>
               <option value="other">Other</option>
             </select>
-            <label htmlFor="subject">Subject</label>
-            <span className="select-border"></span>
+            <label htmlFor="subject" className="contact-form-label">Subject</label>
+            <div className="contact-form-select-arrow">
+              <i className="fas fa-chevron-down"></i>
+            </div>
+            <span className="contact-form-underline"></span>
           </div>
         </div>
 
-        <div className="form-group modern-textarea">
-          <div className="textarea-wrapper">
-            <i className="textarea-icon fas fa-comment-alt"></i>
+        <div className="contact-form-field">
+          <div className="contact-form-field-wrapper">
+            <i className="fas fa-comment-alt contact-form-icon-input contact-form-field-icon-textarea"></i>
             <textarea 
               id="message" 
               name="message" 
@@ -176,18 +184,18 @@ const ContactForm = () => {
               value={formData.message}
               onChange={handleChange}
               required
+              className="contact-form-textarea"
             ></textarea>
-            <label htmlFor="message">Your Message</label>
-            <span className="textarea-border"></span>
+            <label htmlFor="message" className="contact-form-label">Your Message</label>
+            <span className="contact-form-underline"></span>
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-submit modern-submit">
-          <span className="btn-content">
+        <button type="submit" className="contact-form-submit">
+          <span className="contact-form-submit-content">
             <span>Send Message</span>
-            <i className="fas fa-paper-plane"></i>
+            <i className="fas fa-paper-plane contact-form-submit-icon"></i>
           </span>
-          <div className="btn-shine"></div>
         </button>
       </form>
     </div>

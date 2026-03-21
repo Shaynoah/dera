@@ -27,27 +27,38 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
-        <div className="nav-brand">
-          <Link to="/">
-            <div className="nav-brand-content">
-              <img src="/logo.png" alt="Dera Drip" className="nav-logo" />
-              <h1>Dera Drip</h1>
+        <Link to="/" className="navbar-brand">
+          <div className="navbar-brand-content">
+            <img src="/logo.png" alt="Dera Drip" className="navbar-logo" />
+            <div>
+            <h1 className="navbar-title">Dera Drip</h1>
+          <p className="navbar-tagline">Premium Clothing for the Modern You</p>
             </div>
-            <p className="nav-slogan">Premium Clothing for the Modern You</p>
-          </Link>
-        </div>
-        <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
-          <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
-          <li><a href="/#products" onClick={() => setMenuOpen(false)}>Products</a></li>
-          <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+          </div>
+        </Link>
+
+        <ul className={`navbar-nav ${menuOpen ? 'menu-open' : ''}`}>
+          <li>
+            <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          </li>
+          <li>
+            <a href="/#products" onClick={() => setMenuOpen(false)}>Products</a>
+          </li>
+          <li>
+            <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+          </li>
+          <li>
+            <Link to="/admin/login" onClick={() => setMenuOpen(false)}>Admin</Link>
+          </li>
         </ul>
-        <div className="nav-actions">
-          <button className="cart-btn" id="cartBtn" onClick={handleCartClick}>
+
+        <div className="navbar-actions">
+          <button className="cart-btn" id="cartBtn" onClick={handleCartClick} aria-label="Shopping Cart">
             <i className="fas fa-shopping-cart"></i>
-            {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
+            {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
           </button>
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-            <i className="fas fa-bars"></i>
+          <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+            <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
         </div>
       </div>

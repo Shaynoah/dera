@@ -42,29 +42,26 @@ const Contact = () => {
   }
 
   return (
-    <div className="new-contact-page">
+    <div className="contact-page">
       {/* Main Contact Section */}
-      <section className="contact-main-section">
-        <div className="contact-container-new">
+      <section className="contact-section">
+        <div className="contact-grid">
           {/* Left Side - Contact Info */}
-          <div className="contact-info-side">
-            <div className="info-card card-1">
-              <div className="card-glow-effect"></div>
-              <div className="card-content-wrapper">
-                <div className="info-icon-wrapper whatsapp-icon">
+          <div className="contact-info">
+            <div className="contact-card">
+              <div className="contact-card-content">
+                <div className="contact-card-icon contact-card-icon-whatsapp">
                   <i className="fab fa-whatsapp"></i>
-                  <div className="icon-pulse-ring"></div>
-                  <div className="icon-shine"></div>
                 </div>
-                <div className="card-text-content">
-                  <h3>WhatsApp</h3>
-                  <p>Chat with us instantly</p>
+                <div className="contact-card-text">
+                  <h3 className="contact-card-title">WhatsApp</h3>
+                  <p className="contact-card-description">Chat with us instantly</p>
                 </div>
                 <a 
                   href="https://wa.me/254700456049" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="contact-link-btn"
+                  className="contact-card-btn"
                 >
                   <span>Open WhatsApp</span>
                   <i className="fas fa-arrow-right"></i>
@@ -72,21 +69,18 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="info-card card-2">
-              <div className="card-glow-effect"></div>
-              <div className="card-content-wrapper">
-                <div className="info-icon-wrapper phone-icon">
+            <div className="contact-card">
+              <div className="contact-card-content">
+                <div className="contact-card-icon contact-card-icon-phone">
                   <i className="fas fa-phone"></i>
-                  <div className="icon-pulse-ring"></div>
-                  <div className="icon-shine"></div>
                 </div>
-                <div className="card-text-content">
-                  <h3>Call Us</h3>
-                  <p>Speak directly with our team</p>
+                <div className="contact-card-text">
+                  <h3 className="contact-card-title">Call Us</h3>
+                  <p className="contact-card-description">Speak directly with our team</p>
                 </div>
                 <a 
                   href="tel:0700456049" 
-                  className="contact-link-btn"
+                  className="contact-card-btn contact-card-btn-phone"
                 >
                   <span>Call Now</span>
                   <i className="fas fa-arrow-right"></i>
@@ -96,22 +90,19 @@ const Contact = () => {
           </div>
 
           {/* Right Side - Contact Form */}
-          <div className="contact-form-side">
-            <div className="form-wrapper-new">
-              <div className="form-bg-animation"></div>
-              <div className="form-header-new">
-                <div className="form-icon-wrapper">
+          <div className="contact-form-wrapper">
+            <div className="contact-form-card">
+              <div className="contact-form-header">
+                <div className="contact-form-icon">
                   <i className="fas fa-envelope-open-text"></i>
                 </div>
-                <h2>Send us a Message</h2>
-                <p>Fill out the form below and we'll get back to you</p>
+                <h2 className="contact-form-title">Send us a Message</h2>
+                <p className="contact-form-subtitle">Fill out the form below and we'll get back to you</p>
               </div>
               
-              <form className="contact-form-new" onSubmit={handleSubmit}>
-                <div className="form-group-new">
-                  <div className="input-icon">
-                    <i className="fas fa-user"></i>
-                  </div>
+              <form className="contact-form-form" onSubmit={handleSubmit}>
+                <div className="contact-form-field">
+                  <i className="fas fa-user contact-form-field-icon"></i>
                   <input
                     type="text"
                     id="name"
@@ -119,17 +110,15 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="form-input-new"
+                    className="contact-form-input"
                     placeholder=" "
                   />
-                  <label htmlFor="name" className="form-label-new">Your Name</label>
-                  <div className="input-underline"></div>
+                  <label htmlFor="name" className="contact-form-label">Your Name</label>
+                  <span className="contact-form-underline"></span>
                 </div>
 
-                <div className="form-group-new">
-                  <div className="input-icon">
-                    <i className="fas fa-envelope"></i>
-                  </div>
+                <div className="contact-form-field">
+                  <i className="fas fa-envelope contact-form-field-icon"></i>
                   <input
                     type="email"
                     id="email"
@@ -137,17 +126,15 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="form-input-new"
+                    className="contact-form-input"
                     placeholder=" "
                   />
-                  <label htmlFor="email" className="form-label-new">Email Address</label>
-                  <div className="input-underline"></div>
+                  <label htmlFor="email" className="contact-form-label">Email Address</label>
+                  <span className="contact-form-underline"></span>
                 </div>
 
-                <div className="form-group-new">
-                  <div className="input-icon">
-                    <i className="fas fa-phone"></i>
-                  </div>
+                <div className="contact-form-field">
+                  <i className="fas fa-phone contact-form-field-icon"></i>
                   <input
                     type="tel"
                     id="phone"
@@ -155,17 +142,15 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="form-input-new"
+                    className="contact-form-input"
                     placeholder=" "
                   />
-                  <label htmlFor="phone" className="form-label-new">Phone Number</label>
-                  <div className="input-underline"></div>
+                  <label htmlFor="phone" className="contact-form-label">Phone Number</label>
+                  <span className="contact-form-underline"></span>
                 </div>
 
-                <div className="form-group-new">
-                  <div className="input-icon textarea-icon">
-                    <i className="fas fa-comment-dots"></i>
-                  </div>
+                <div className="contact-form-field">
+                  <i className="fas fa-comment-dots contact-form-field-icon contact-form-field-icon-textarea"></i>
                   <textarea
                     id="message"
                     name="message"
@@ -173,22 +158,16 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="form-textarea-new"
+                    className="contact-form-textarea"
                     placeholder=" "
                   ></textarea>
-                  <label htmlFor="message" className="form-label-new">Your Message</label>
-                  <div className="input-underline"></div>
+                  <label htmlFor="message" className="contact-form-label">Your Message</label>
+                  <span className="contact-form-underline"></span>
                 </div>
 
-                <button type="submit" className="submit-btn-new">
-                  <span className="btn-text">Send Message</span>
+                <button type="submit" className="contact-form-submit">
+                  <span>Send Message</span>
                   <i className="fas fa-paper-plane"></i>
-                  <div className="btn-shine"></div>
-                  <div className="btn-particles">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
                 </button>
               </form>
             </div>

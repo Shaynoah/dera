@@ -5,7 +5,7 @@ const WhatsAppFloat = () => {
   return (
     <a 
       href="https://wa.me/254700456049" 
-      className="whatsapp-float" 
+      className="whatsapp-float"
       target="_blank" 
       rel="noopener noreferrer"
       title="Chat with us on WhatsApp"

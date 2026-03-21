@@ -1,6 +1,37 @@
 .footer {
-    background: var(--primary-color);
-    color: var(--white);
-    text-align: center;
-    padding: 2rem 0;
+  background: #1a1a1a;
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.4rem 0;
+  }
+
+  .footer .container {
+    padding: 0 14px;
+  }
+
+  .footer p {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer p {
+    font-size: 0.86rem;
+  }
 }

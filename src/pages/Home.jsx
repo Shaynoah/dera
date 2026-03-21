@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Hero from '../components/Hero'
 import Products from '../components/Products'
-import './Home.css'
 
 const Home = () => {
   useEffect(() => {
@@ -10,7 +9,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="home-page">
+    <div>
       <Hero />
       <Products />
     </div>
