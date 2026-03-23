@@ -68,6 +68,8 @@ const OrderModal = ({ onClose, cartItems, total }) => {
   }
 
   const handleProceed = async () => {
+    if (isSubmittingPayment) return
+
     if (!paymentMethod) {
       alert('Please select a payment method')
       return
