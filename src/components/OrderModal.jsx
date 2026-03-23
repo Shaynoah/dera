@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { useCart } from '../context/CartContext'
+import { initiateMpesaStkPush } from '../lib/payments'
 import './OrderModal.css'
 
 const OrderModal = ({ onClose, cartItems, total }) => {
-  const { clearCart } = useCart()
   const [formData, setFormData] = useState({
     email: '',
     country: 'Kenya',
@@ -20,8 +19,10 @@ const OrderModal = ({ onClose, cartItems, total }) => {
 
   const [errors, setErrors] = useState({})
   const [showPayment, setShowPayment] = useState(false)
-  const [paymentMethod, setPaymentMethod] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState('mpesa')
   const [mpesaNumber, setMpesaNumber] = useState('')
+  const [isSubmittingPayment, setIsSubmittingPayment] = useState(false)
+  const [paymentFeedback, setPaymentFeedback] = useState('')
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -66,7 +67,7 @@ const OrderModal = ({ onClose, cartItems, total }) => {
     setShowPayment(true)
   }
 
-  const handleProceed = () => {
+  const handleProceed = async () => {
     if (!paymentMethod) {
       alert('Please select a payment method')
       return
@@ -77,36 +78,25 @@ const OrderModal = ({ onClose, cartItems, total }) => {
       return
     }
     
-    if (paymentMethod === 'airtel' && !mpesaNumber) {
-      alert('Please enter your Airtel Money mobile number')
-      return
+    try {
+      setIsSubmittingPayment(true)
+      setPaymentFeedback('')
+
+      const orderRef = `DERA-${Date.now()}`
+      const result = await initiateMpesaStkPush({
+        phone: mpesaNumber,
+        amount: total,
+        orderRef,
+      })
+
+      setPaymentFeedback(
+        result.customerMessage || 'STK push sent. Please enter your M-PESA PIN on your phone.',
+      )
+    } catch (error) {
+      setPaymentFeedback(error.message || 'Could not start M-PESA payment.')
+    } finally {
+      setIsSubmittingPayment(false)
     }
-
-    // Submit order
-    let orderMessage = `*New Order from Dera Drip Website*\n\n`
-    orderMessage += `*Customer Details:*\n`
-    orderMessage += `Email: ${formData.email}\n`
-    orderMessage += `Name: ${formData.firstName} ${formData.lastName}\n`
-    orderMessage += `Phone: ${formData.phone}\n`
-    orderMessage += `Address: ${formData.address}\n`
-    if (formData.city) orderMessage += `City: ${formData.city}\n`
-    if (formData.postalCode) orderMessage += `Postal Code: ${formData.postalCode}\n`
-    orderMessage += `Payment Method: ${paymentMethod === 'mpesa' ? 'M-PESA' : 'Airtel Money'}\n`
-    if (mpesaNumber) orderMessage += `Mobile Number: ${mpesaNumber}\n`
-    orderMessage += `\n*Order Items:*\n`
-    
-    cartItems.forEach(item => {
-      orderMessage += `${item.name} x${item.quantity} - KSh ${(item.price * item.quantity).toLocaleString()}\n`
-    })
-    
-    orderMessage += `\n*Total: KSh ${total.toLocaleString()}*`
-
-    const encodedMessage = encodeURIComponent(orderMessage)
-    const whatsappUrl = `https://wa.me/254700456049?text=${encodedMessage}`
-
-    window.open(whatsappUrl, '_blank')
-    clearCart()
-    onClose()
   }
 
   return (
@@ -394,21 +384,6 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                       <span className="order-modal-payment-name">M-PESA</span>
                     </div>
                   </label>
-
-                  <label className={`order-modal-payment-option ${paymentMethod === 'airtel' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="airtel"
-                      checked={paymentMethod === 'airtel'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      className="order-modal-payment-radio"
-                    />
-                    <div className="order-modal-payment-content">
-                      <span className="order-modal-payment-badge order-modal-payment-badge-airtel">Airtel Money</span>
-                      <span className="order-modal-payment-name">Airtel Money</span>
-                    </div>
-                  </label>
                 </div>
 
                 {paymentMethod && (
@@ -423,18 +398,10 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                       </div>
                     )}
 
-                    {paymentMethod === 'airtel' && (
-                      <div className="order-modal-payment-instructions">
-                        <p>1. Provide your Airtel Money [KE] mobile number below</p>
-                        <p>2. Click Proceed and a prompt will appear on your phone requesting you to confirm transaction by providing your Airtel Money PIN</p>
-                        <p>3. Once completed, you will receive the confirmation SMS for this transaction</p>
-                      </div>
-                    )}
-
                     <div className="mb-6">
                       <div className="order-modal-payment-label">
                         <i className="fas fa-lock"></i>
-                        <label>Provide your {paymentMethod === 'mpesa' ? 'Mpesa' : 'Airtel Money'} [KE] Mobile number</label>
+                        <label>Provide your Mpesa [KE] Mobile number</label>
                       </div>
                       <div className="order-modal-payment-input-wrapper">
                         <i className="fas fa-phone"></i>
@@ -448,13 +415,19 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                         />
                       </div>
                     </div>
+                    {paymentFeedback && (
+                      <p className="order-modal-payment-amount" style={{ marginTop: '-8px', marginBottom: '16px' }}>
+                        {paymentFeedback}
+                      </p>
+                    )}
 
                     <button 
                       type="button"
                       onClick={handleProceed}
                       className="order-modal-proceed-btn hidden md:block"
+                      disabled={isSubmittingPayment}
                     >
-                      Proceed
+                      {isSubmittingPayment ? 'Sending STK...' : 'Proceed'}
                     </button>
                   </div>
                 )}
@@ -513,8 +486,9 @@ const OrderModal = ({ onClose, cartItems, total }) => {
                     type="button"
                     onClick={handleProceed}
                     className="order-modal-proceed-btn hidden md:block mt-6 mb-4"
+                    disabled={isSubmittingPayment}
                   >
-                    Proceed
+                    {isSubmittingPayment ? 'Sending STK...' : 'Proceed'}
                   </button>
                 )}
 

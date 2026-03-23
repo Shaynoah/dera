@@ -34,6 +34,11 @@ cp .env.example .env
 Then set:
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_ANON_KEY`
+- `MPESA_CONSUMER_KEY` (Netlify/server env)
+- `MPESA_CONSUMER_SECRET` (Netlify/server env)
+- `MPESA_BUSINESS_SHORTCODE` (Netlify/server env)
+- `MPESA_PASSKEY` (Netlify/server env)
+- `MPESA_CALLBACK_URL` (Netlify/server env)
 
 3. Start the development server:
 ```bash
@@ -107,6 +112,21 @@ with check (true);
 ```
 
 Note: the current admin login is frontend-only (`admin / admin123`), so secure production access should use Supabase Auth + stricter policies.
+
+## M-PESA STK Push Setup (Netlify Functions)
+
+This project uses:
+- `netlify/functions/mpesa-stk-push.js` for initiating STK push
+- `netlify/functions/mpesa-callback.js` for Safaricom callback handling
+
+Set these variables in Netlify site environment settings (not frontend `.env`):
+- `MPESA_CONSUMER_KEY`
+- `MPESA_CONSUMER_SECRET`
+- `MPESA_BUSINESS_SHORTCODE`
+- `MPESA_PASSKEY`
+- `MPESA_CALLBACK_URL` (example: `https://your-site.netlify.app/api/mpesa/callback`)
+
+Frontend checkout calls `/.netlify/functions/mpesa-stk-push`, so no secret key is exposed to the browser.
 
 ## Browser Support
 
