@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { supabase } from '../lib/supabaseClient'
 
 const ProductContext = createContext(null)
 const STORAGE_KEY = 'dera_products'
 const AUTH_KEY = 'dera_admin_auth'
 const DEFAULT_CATEGORY = 'Backless Deras'
 const LEGACY_DRESS_NAME_REGEX = /^Dress\s*\d+$/i
+const PRODUCTS_TABLE = 'products'
 
 const normalizeCategory = (category) =>
   category === 'Full Deras' || category === 'Backless Deras' ? category : DEFAULT_CATEGORY
@@ -18,11 +20,23 @@ const normalizeName = (name) => {
 
 const sanitizeProduct = (product) => ({
   ...product,
+  id: Number(product.id),
   name: normalizeName(product.name),
   sold: Boolean(product.sold),
   category: normalizeCategory(product.category),
-  // Keep only uploaded images (data URLs). Drop older external URLs.
-  image: typeof product.image === 'string' && product.image.startsWith('data:image/') ? product.image : '',
+  image: typeof product.image === 'string' ? product.image : '',
+  price: Number(product.price) || 0,
+})
+
+const hasSupabaseConfig = Boolean(supabase)
+
+const toDbPayload = (productInput) => ({
+  name: normalizeName(productInput.name),
+  description: typeof productInput.description === 'string' ? productInput.description : '',
+  image: typeof productInput.image === 'string' ? productInput.image : '',
+  price: Number(productInput.price) || 0,
+  sold: Boolean(productInput.sold),
+  category: normalizeCategory(productInput.category),
 })
 
 const readProducts = () => {
@@ -38,44 +52,115 @@ const readProducts = () => {
 }
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(readProducts)
+  const [products, setProducts] = useState([])
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
 
-  useEffect(() => {
-    // Cleanup any legacy products that do not have uploaded images.
-    setProducts((prevProducts) =>
-      prevProducts.filter(
-        (product) =>
-          typeof product.image === 'string' &&
-          product.image.startsWith('data:image/') &&
-          product.image.trim().length > 0,
-      ),
-    )
+  const loadProducts = useCallback(async () => {
+    try {
+      if (!hasSupabaseConfig) {
+        setProducts(readProducts())
+        return
+      }
+
+      const { data, error } = await supabase
+        .from(PRODUCTS_TABLE)
+        .select('*')
+        .order('id', { ascending: true })
+
+      if (error) {
+        throw error
+      }
+
+      setProducts((data || []).map(sanitizeProduct).filter((product) => Boolean(product.image)))
+    } catch (error) {
+      console.error('Failed to load products:', error)
+      setProducts(readProducts())
+    } finally {
+      setIsLoadingProducts(false)
+    }
   }, [])
 
   useEffect(() => {
+    loadProducts()
+  }, [loadProducts])
+
+  useEffect(() => {
+    if (hasSupabaseConfig) return
     localStorage.setItem(STORAGE_KEY, JSON.stringify(products))
   }, [products])
 
-  const updateProduct = (id, updates) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) => (product.id === id ? { ...product, ...updates } : product)),
-    )
-  }
-
-  const addProduct = (productInput) => {
-    const nextId = products.length ? Math.max(...products.map((product) => product.id)) + 1 : 1
-    const newProduct = {
-      id: nextId,
-      sold: false,
-      ...productInput,
-      category: normalizeCategory(productInput.category),
-      price: Number(productInput.price) || 0,
+  const updateProduct = async (id, updates) => {
+    if (!hasSupabaseConfig) {
+      setProducts((prevProducts) =>
+        prevProducts.map((product) => (product.id === id ? { ...product, ...updates } : product)),
+      )
+      return true
     }
-    setProducts((prevProducts) => [...prevProducts, newProduct])
+
+    const payload = toDbPayload({ ...products.find((product) => product.id === id), ...updates })
+    const { data, error } = await supabase
+      .from(PRODUCTS_TABLE)
+      .update(payload)
+      .eq('id', id)
+      .select('*')
+      .single()
+
+    if (error) {
+      console.error('Failed to update product:', error)
+      return false
+    }
+
+    const updated = sanitizeProduct(data)
+    setProducts((prevProducts) =>
+      prevProducts.map((product) => (product.id === id ? updated : product)),
+    )
+    return true
   }
 
-  const deleteProduct = (id) => {
+  const addProduct = async (productInput) => {
+    if (!hasSupabaseConfig) {
+      const nextId = products.length ? Math.max(...products.map((product) => product.id)) + 1 : 1
+      const newProduct = {
+        id: nextId,
+        sold: false,
+        ...productInput,
+        category: normalizeCategory(productInput.category),
+        price: Number(productInput.price) || 0,
+      }
+      setProducts((prevProducts) => [...prevProducts, sanitizeProduct(newProduct)])
+      return true
+    }
+
+    const payload = toDbPayload({ ...productInput, sold: false })
+    const { data, error } = await supabase
+      .from(PRODUCTS_TABLE)
+      .insert(payload)
+      .select('*')
+      .single()
+
+    if (error) {
+      console.error('Failed to add product:', error)
+      return false
+    }
+
+    setProducts((prevProducts) => [...prevProducts, sanitizeProduct(data)])
+    return true
+  }
+
+  const deleteProduct = async (id) => {
+    if (!hasSupabaseConfig) {
+      setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id))
+      return true
+    }
+
+    const { error } = await supabase.from(PRODUCTS_TABLE).delete().eq('id', id)
+    if (error) {
+      console.error('Failed to delete product:', error)
+      return false
+    }
+
     setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id))
+    return true
   }
 
   const adminLogin = (username, password) => {
@@ -96,6 +181,8 @@ export const ProductProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       products,
+      isLoadingProducts,
+      refreshProducts: loadProducts,
       addProduct,
       updateProduct,
       deleteProduct,
@@ -103,7 +190,7 @@ export const ProductProvider = ({ children }) => {
       adminLogout,
       isAdminAuthenticated,
     }),
-    [products],
+    [products, isLoadingProducts, loadProducts],
   )
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

@@ -18,7 +18,7 @@ const AdminDashboard = () => {
     navigate('/admin/login')
   }
 
-  const handleAddProduct = (event) => {
+  const handleAddProduct = async (event) => {
     event.preventDefault()
     if (!draft.image.trim()) {
       setUploadError('Please upload a product image file.')
@@ -29,13 +29,17 @@ const AdminDashboard = () => {
       setUploadError('Please enter a valid price.')
       return
     }
-    addProduct({
+    const ok = await addProduct({
       name: '',
       description: '',
       image: draft.image.trim(),
       price: numericPrice,
       category: draft.category,
     })
+    if (!ok) {
+      setUploadError('Could not save product. Check your Supabase setup and try again.')
+      return
+    }
     setDraft(emptyProduct)
     setUploadError('')
     if (fileInputRef.current) {
@@ -73,8 +77,12 @@ const AdminDashboard = () => {
     }
 
     const reader = new FileReader()
-    reader.onloadend = () => {
-      updateProduct(productId, { image: String(reader.result || '') })
+    reader.onloadend = async () => {
+      const ok = await updateProduct(productId, { image: String(reader.result || '') })
+      if (!ok) {
+        setUploadError('Could not update image. Please try again.')
+        return
+      }
       setUploadError('')
     }
     reader.onerror = () => {
@@ -83,30 +91,43 @@ const AdminDashboard = () => {
     reader.readAsDataURL(file)
   }
 
-  const handleDeleteProduct = (productId) => {
-    deleteProduct(productId)
+  const handleDeleteProduct = async (productId) => {
+    const ok = await deleteProduct(productId)
+    if (!ok) {
+      setUploadError('Could not delete product. Please try again.')
+    }
   }
 
-  const handleToggleSold = (product) => {
-    updateProduct(product.id, { sold: !product.sold })
+  const handleToggleSold = async (product) => {
+    const ok = await updateProduct(product.id, { sold: !product.sold })
+    if (!ok) {
+      setUploadError('Could not update sold status. Please try again.')
+    }
   }
 
   const handlePriceDraftChange = (productId, value) => {
     setPriceDrafts((prev) => ({ ...prev, [productId]: value }))
   }
 
-  const handleCategoryChange = (productId, category) => {
-    updateProduct(productId, { category })
+  const handleCategoryChange = async (productId, category) => {
+    const ok = await updateProduct(productId, { category })
+    if (!ok) {
+      setUploadError('Could not update category. Please try again.')
+    }
   }
 
-  const handleUpdatePrice = (product) => {
+  const handleUpdatePrice = async (product) => {
     const value = priceDrafts[product.id]
     const numericPrice = Number.parseFloat(value)
     if (Number.isNaN(numericPrice) || numericPrice < 0) {
       setUploadError('Please enter a valid price before updating.')
       return
     }
-    updateProduct(product.id, { price: numericPrice })
+    const ok = await updateProduct(product.id, { price: numericPrice })
+    if (!ok) {
+      setUploadError('Could not update price. Please try again.')
+      return
+    }
     setUploadError('')
   }
 
