@@ -6,6 +6,11 @@ const requiredEnv = [
   'MPESA_CALLBACK_URL',
 ]
 
+const getMpesaBaseUrl = () =>
+  process.env.MPESA_ENV === 'production'
+    ? 'https://api.safaricom.co.ke'
+    : 'https://sandbox.safaricom.co.ke'
+
 const toKenyanPhone = (input) => {
   const digits = String(input || '').replace(/\D/g, '')
   if (digits.startsWith('254') && digits.length === 12) return digits
@@ -29,13 +34,11 @@ const jsonResponse = (statusCode, payload) => ({
 const getMpesaAccessToken = async () => {
   const { MPESA_CONSUMER_KEY, MPESA_CONSUMER_SECRET } = process.env
   const auth = Buffer.from(`${MPESA_CONSUMER_KEY}:${MPESA_CONSUMER_SECRET}`).toString('base64')
-  const response = await fetch(
-    'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
-    {
-      method: 'GET',
-      headers: { Authorization: `Basic ${auth}` },
-    },
-  )
+  const baseUrl = getMpesaBaseUrl()
+  const response = await fetch(`${baseUrl}/oauth/v1/generate?grant_type=client_credentials`, {
+    method: 'GET',
+    headers: { Authorization: `Basic ${auth}` },
+  })
   const data = await response.json()
   if (!response.ok || !data.access_token) {
     throw new Error(data.errorMessage || data.error || 'Failed to get M-PESA access token.')
@@ -92,7 +95,7 @@ export const handler = async (event) => {
       BusinessShortCode: shortcode,
       Password: password,
       Timestamp: timestamp,
-      TransactionType: 'CustomerBuyGoodsOnline',
+      TransactionType: process.env.MPESA_TRANSACTION_TYPE || 'CustomerPayBillOnline',
       Amount: amount,
       PartyA: phone,
       PartyB: shortcode,
@@ -102,7 +105,8 @@ export const handler = async (event) => {
       TransactionDesc: 'Dera Drip Order Payment',
     }
 
-    const response = await fetch('https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
+    const baseUrl = getMpesaBaseUrl()
+    const response = await fetch(`${baseUrl}/mpesa/stkpush/v1/processrequest`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

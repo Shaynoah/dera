@@ -125,6 +125,8 @@ Set these variables in Netlify site environment settings (not frontend `.env`):
 - `MPESA_BUSINESS_SHORTCODE`
 - `MPESA_PASSKEY`
 - `MPESA_CALLBACK_URL` (example: `https://your-site.netlify.app/api/mpesa/callback`)
+- `MPESA_ENV` (`sandbox` for testing, `production` for live)
+- `MPESA_TRANSACTION_TYPE` (optional, defaults to `CustomerPayBillOnline`)
 
 Frontend checkout calls `/.netlify/functions/mpesa-stk-push`, so no secret key is exposed to the browser.
 
